@@ -38,6 +38,26 @@ mongoose.connect(db, {
 // instantiate express application object
 const app = express()
 
+// initialize socket constants
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+
+// socket functions
+
+io.on('connection', socket => {
+  console.log('a user connected', socket.id)
+  socket.on('new message', msg => {
+    io.emit('new message', msg)
+  })
+  socket.on('user-typing', input => {
+    console.log(input)
+    io.emit('user-typing', input)
+  })
+  socket.on('disconnect', function () {
+    console.log('a user disconnected', socket.id)
+  })
+})
+
 // set CORS headers on response from this API using the `cors` NPM package
 // `CLIENT_ORIGIN` is an environment variable that will be set on Heroku
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://localhost:${clientDevPort}` }))
@@ -74,7 +94,7 @@ app.use(messageRoutes)
 app.use(errorHandler)
 
 // run API on designated port (4741 in this case)
-app.listen(port, () => {
+http.listen(port, () => {
   console.log('listening on port ' + port)
 })
 
