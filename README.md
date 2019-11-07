@@ -40,6 +40,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 Install dependencies with npm install.
+Install mongoose-autopopulate with npm install.
 
 ## Built With
 
