@@ -30,7 +30,7 @@ const router = express.Router()
 // INDEX
 // GET /message
 router.get('/messages', requireToken, (req, res, next) => {
-  Message.find()
+  Message.find().populate('owner')
     .then(message => {
       // `message` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -64,6 +64,7 @@ router.post('/messages', requireToken, (req, res, next) => {
   Message.create(req.body.message)
     // respond to succesful `create` with status 201 and JSON of new "message"
     .then(message => {
+      message.populate('owner')
       res.status(201).json({ message: message.toObject() })
     })
     // if an error occurs, pass it off to our error handler
