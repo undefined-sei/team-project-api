@@ -8,10 +8,18 @@ const messageSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
+    autopopulate: true
+  },
+  room: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Room',
+    required: false
   }
 }, {
   timestamps: true
 })
+
+messageSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model('Message', messageSchema)
