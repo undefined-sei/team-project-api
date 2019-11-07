@@ -54,6 +54,14 @@ io.on('connection', socket => {
     console.log(input)
     io.emit('user-typing', input)
   })
+  socket.on('update message', msg => {
+    console.log(msg)
+    io.emit('update message', msg)
+  })
+  socket.on('delete message', msg => {
+    console.log(msg)
+    io.emit('delete message', msg)
+  })
   socket.on('disconnect', function () {
     console.log('a user disconnected', socket.id)
   })
