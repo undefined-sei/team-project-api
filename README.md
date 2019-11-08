@@ -1,5 +1,7 @@
 # Team-Undefined-express-api
 
+![Website](https://i.imgur.com/yfzxOqC.png)
+
 [Deployed Client](https://undefined-sei.github.io/team-project-client/)
 
 [Deployed API](https://glacial-cliffs-68778.herokuapp.com/)
